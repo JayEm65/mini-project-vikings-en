@@ -46,7 +46,12 @@ while great_war.showStatus() == "Vikings and Saxons are still in the thick of ba
     print(Fore.CYAN + f"Viking army: {len(great_war.vikingArmy)} warriors" + Fore.WHITE + " | " + 
           Fore.YELLOW + f"Saxon army: {len(great_war.saxonArmy)} warriors\n")
 
-    print(Fore.WHITE + great_war.showStatus())
+    # Determine and colorize the final status message
+    final_status = great_war.showStatus()
+    if "Vikings have won" in final_status or "Saxons have fought" in final_status:
+        print(Fore.GREEN + final_status)
+    else:
+        print(Fore.WHITE + final_status)
 
     # Delay between rounds
     time.sleep(1)
