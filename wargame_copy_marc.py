@@ -1,27 +1,35 @@
-# With a correction already implemented: dont forget to initialize an instance of Class "War"
+# WAR !!!
 
-
-from vikingsClasses_copy_marc import Soldier, Viking, Saxon, War
+from vikingsClasses_copy_marc import War, Viking, Saxon
 import random
+import time
 
-
-soldier_names = ["albert","andres","archie","dani", "david","gerard","german","graham","imanol","laura"]
+soldier_names = ["albert", "andres", "archie", "dani", "david", "gerard", "german", "graham", "imanol", "laura"]
 great_war = War()
 
-#Create 5 Vikings
-for i in range(0,5):
+# Create 5 Vikings
+for i in range(0, 5):
     if i:
-        great_war.addViking(Viking(soldier_names[random.randint(0,9)],100,random.randint(0,100)))
+        great_war.addViking(Viking(soldier_names[random.randint(0, 9)].capitalize(), 100, random.randint(0, 100)))
 
-#Create 5 Saxons
-for i in range(0,5):
+# Create 5 Saxons
+for i in range(0, 5):
     if i:
-        great_war.addSaxon(Saxon(100,random.randint(0,100)))
-    
+        great_war.addSaxon(Saxon(100, random.randint(0, 100)))
+
 round = 0
 while great_war.showStatus() == "Vikings and Saxons are still in the thick of battle.":
-    great_war.vikingAttack()
-    great_war.saxonAttack()
-    print(f"round: {round} // Viking army: {len(great_war.vikingArmy)} warriors",f"and Saxon army: {len(great_war.saxonArmy)} warriors")
+    print(f"Round {round}... The battle rages on...\n")
+    
+    result_viking_attack = great_war.vikingAttack()
+    print(result_viking_attack)
+    
+    result_saxon_attack = great_war.saxonAttack()
+    print(result_saxon_attack)
+    
+    print(f"Viking army: {len(great_war.vikingArmy)} warriors | Saxon army: {len(great_war.saxonArmy)} warriors\n")
     print(great_war.showStatus())
+    
+    time.sleep(2)
+    
     round += 1
