@@ -14,8 +14,6 @@ pygame.mixer.init()
 # Load sound files
 victory_sound = pygame.mixer.Sound("sounds/victory_sound.wav")
 death_sound = pygame.mixer.Sound("sounds/death_sound.wav")
-viking_attack_sound = pygame.mixer.Sound("sounds/Viking_attack_sound.wav")
-saxon_attack_sound = pygame.mixer.Sound("sounds/Saxon_attack_sound.wav")
 
 soldier_names = ["albert", "andres", "archie", "dani", "david", "gerard", "german", "graham", "imanol", "laura"]
 great_war = War()
@@ -43,7 +41,6 @@ while great_war.showStatus() == "Vikings and Saxons are still in the thick of ba
         print(Fore.MAGENTA + result_viking_attack)
     else:
         print(Fore.YELLOW + result_viking_attack)
-        viking_attack_sound.play()
 
     # Simulate Saxon attack
     result_saxon_attack = great_war.saxonAttack()
@@ -54,7 +51,6 @@ while great_war.showStatus() == "Vikings and Saxons are still in the thick of ba
         print(Fore.MAGENTA + result_saxon_attack)
     else:
         print(Fore.CYAN + result_saxon_attack)
-        saxon_attack_sound.play()
 
     # Army status
     print(Fore.CYAN + f"Viking army: {len(great_war.vikingArmy)} warriors" + Fore.WHITE + " | " + 
@@ -72,6 +68,6 @@ while great_war.showStatus() == "Vikings and Saxons are still in the thick of ba
         print(Fore.WHITE + final_status)
 
     # Delay between rounds
-    time.sleep(3)
+    time.sleep(1)
     
     round += 1
