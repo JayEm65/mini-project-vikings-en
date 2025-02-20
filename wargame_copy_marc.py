@@ -1,8 +1,11 @@
 # WAR !!!
-
 from vikingsClasses_copy_marc import War, Viking, Saxon
 import random
 import time
+from colorama import Fore, Style, init
+
+# Init colorama
+init(autoreset=True)
 
 soldier_names = ["albert", "andres", "archie", "dani", "david", "gerard", "german", "graham", "imanol", "laura"]
 great_war = War()
@@ -19,21 +22,33 @@ for i in range(0, 5):
 
 round = 0
 while great_war.showStatus() == "Vikings and Saxons are still in the thick of battle.":
-    print(f"Round {round}... The battle rages on...\n")
-    
+    print(Fore.WHITE + f"Round {round}... The battle rages on...\n")
+
     # Simulate Viking attack
     result_viking_attack = great_war.vikingAttack()
-    print(result_viking_attack)
-    
+    if "died" in result_viking_attack:
+        print(Fore.RED + result_viking_attack)
+    elif "received" in result_viking_attack:
+        print(Fore.MAGENTA + result_viking_attack)
+    else:
+        print(Fore.YELLOW + result_viking_attack)
+
     # Simulate Saxon attack
     result_saxon_attack = great_war.saxonAttack()
-    print(result_saxon_attack)
-    
-    # Print the current army status
-    print(f"Viking army: {len(great_war.vikingArmy)} warriors | Saxon army: {len(great_war.saxonArmy)} warriors\n")
-    print(great_war.showStatus())
-    
-    # Add a delay between rounds for suspense
-    time.sleep(2)  # Pause for 2 seconds
+    if "died" in result_saxon_attack:
+        print(Fore.RED + result_saxon_attack)
+    elif "received" in result_saxon_attack:
+        print(Fore.MAGENTA + result_saxon_attack)
+    else:
+        print(Fore.CYAN + result_saxon_attack)
+
+    # Army status
+    print(Fore.CYAN + f"Viking army: {len(great_war.vikingArmy)} warriors" + Fore.WHITE + " | " + 
+          Fore.YELLOW + f"Saxon army: {len(great_war.saxonArmy)} warriors\n")
+
+    print(Fore.WHITE + great_war.showStatus())
+
+    # Delay between rounds
+    time.sleep(1)
     
     round += 1
