@@ -4,7 +4,6 @@ import random
 import time
 from colorama import Fore, Style, init
 import pygame
-import sys
 
 # Colorama
 init(autoreset=True)
@@ -29,19 +28,9 @@ for _ in range(5):
 for _ in range(5):  
     great_war.addSaxon(Saxon(100, random.randint(20, 50)))
 
-# Typewriter effect function
-def typewriter_print(text, delay=0.05):
-    """Print text one character at a time with a delay to simulate a typewriter effect."""
-    for char in text:
-        sys.stdout.write(char)
-        sys.stdout.flush()
-        time.sleep(delay)
-    print()  # Move to the next line after printing the text
-
 round = 1
 while great_war.showStatus() == "Vikings and Saxons are still in the thick of battle.":
-    # Typewriter effect for round message
-    typewriter_print(Fore.WHITE + f"Round {round}... The battle rages on...\n")
+    print(Fore.WHITE + f"Round {round}... The battle rages on...\n")
 
     # Simulate Viking attack
     saxon_damage_before = sum(saxon.health for saxon in great_war.saxonArmy)
@@ -71,28 +60,27 @@ while great_war.showStatus() == "Vikings and Saxons are still in the thick of ba
     else:
         print(Fore.CYAN + result_saxon_attack)
 
-    # Battle Sounds
+    # Battle Sounds Interval
     if round == 1 or round % 5 == 0:
         if saxon_damage_taken > viking_damage_taken:
             viking_attack_sound.play()
         elif viking_damage_taken > saxon_damage_taken:
             saxon_attack_sound.play()
 
-    # Army status (white text in typewriter)
-    typewriter_print(Fore.WHITE + f"Viking army: {len(great_war.vikingArmy)} warriors" + Fore.WHITE + " | " + 
-                     Fore.WHITE + f"Saxon army: {len(great_war.saxonArmy)} warriors\n")
+    # Army status
+    print(Fore.CYAN + f"Viking army: {len(great_war.vikingArmy)} warriors" + Fore.WHITE + " | " + 
+          Fore.YELLOW + f"Saxon army: {len(great_war.saxonArmy)} warriors\n")
 
     # Victory message
     final_status = great_war.showStatus()
-    if "Vikings have won" in final_status:
-        print(Fore.GREEN + final_status)
+    if "Vikings have won" in final_status or "Saxons have fought" in final_status:
+        pygame.mixer.stop()
         victory_sound.play()
-    elif "Saxons have fought" in final_status:
+        time.sleep(victory_sound.get_length())
         print(Fore.GREEN + final_status)
-        victory_sound.play()
     else:
         print(Fore.WHITE + final_status)
 
-    time.sleep(3)
+    time.sleep(2)
     
     round += 1
