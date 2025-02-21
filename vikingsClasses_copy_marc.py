@@ -1,6 +1,6 @@
 import random
 
-# Soldier
+# Soldier Class
 class Soldier:
     def __init__(self, health, strength):
         self.health = health
@@ -15,7 +15,7 @@ class Soldier:
             return None
         return None
 
-# Viking
+# Viking Class
 class Viking(Soldier):
     def __init__(self, name, health, strength):
         super().__init__(health, strength)
@@ -30,7 +30,7 @@ class Viking(Soldier):
             return f"{self.name} has died in act of combat"
         return f"{self.name} has received {damage} points of damage"
 
-# Saxon
+# Saxon Class
 class Saxon(Soldier):
     def __init__(self, health, strength):
         super().__init__(health, strength)
@@ -41,7 +41,7 @@ class Saxon(Soldier):
             return "A Saxon has died in combat"
         return f"A Saxon has received {damage} points of damage"
 
-# Davicente
+# War Class
 class War:
     def __init__(self):
         self.vikingArmy = []
