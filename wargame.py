@@ -1,5 +1,5 @@
 # WAR !!!
-from vikingsClasses_copy_marc import War, Viking, Saxon
+from vikingsClasses import War, Viking, Saxon
 import random
 import time
 from colorama import Fore, Style, init
